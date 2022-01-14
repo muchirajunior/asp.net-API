@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace aspapi.Controllers
 {
     [ApiController]
+    [Route("")]
      public class HomeController : ControllerBase
     {
         [Route("")]
@@ -30,6 +31,10 @@ namespace aspapi.Controllers
             d.Add(" username",username);
             return d ;
         }
+
+        [Route("search")]
+        //use /search?id=&token=
+        public dynamic search(int id,String token) => $"id is {id} and token is {token}";
     }
 
     
