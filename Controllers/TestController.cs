@@ -11,13 +11,18 @@ namespace aspapi.Controllers
     [Route("test/[action]")]
 
     public class TestController : ControllerBase {
-
         public String Get(){
             return "hello test from the route";
         }
 
          public String Get2(){
             return "hello 2 test from the route";
+        }
+
+        public dynamic GetData(){
+            var data=new Dictionary<String,dynamic>{};
+            data.Add("names",new List<dynamic>{"john","james","junior","mary"});
+            return data;
         }
     }
 }

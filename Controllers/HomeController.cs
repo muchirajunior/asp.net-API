@@ -12,6 +12,7 @@ namespace aspapi.Controllers
      public class HomeController : ControllerBase
     {
         [Route("")]
+        [Route("home")] //adding two routes on same service
         public String homePage() => "  hello this is the home page"; 
 
         [Route("about")]
@@ -35,6 +36,19 @@ namespace aspapi.Controllers
         [Route("search")]
         //use /search?id=&token=
         public dynamic search(int id,String token) => $"id is {id} and token is {token}";
+
+        [Route("[controller]/[action]")]
+        //this route return home/getname that is name of the controller followed by service name as action
+        public dynamic GetName(){
+            var name=new Dictionary<String,dynamic>{};
+            name.Add("name","muchira junior");
+
+            return name;
+        }
+
+        //route constrains user id should be an intenger and more than 20 and less than 40
+        [Route("user/{id:int:min(20):max(40)}")]
+        public string getUserId(int id)=> $"this user id number {id}"; 
     }
 
     
