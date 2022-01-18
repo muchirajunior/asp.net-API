@@ -1,6 +1,6 @@
 using System;
 
-namespace aspapi.Controllers
+namespace aspapi.Models
 {
    public class UserModel {
        public int id { get; set;}

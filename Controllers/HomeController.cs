@@ -34,7 +34,7 @@ namespace aspapi.Controllers
         }
 
         [Route("search")]
-        //use /search?id=&token=
+        //using search parameters i.e /search?id=&token=
         public dynamic search(int id,String token) => $"id is {id} and token is {token}";
 
         [Route("[controller]/[action]")]
