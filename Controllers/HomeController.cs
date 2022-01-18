@@ -27,7 +27,7 @@ namespace aspapi.Controllers
         }
 
         [Route("user/{username}")]
-        public dynamic getUser(String username){
+        public dynamic getUser([FromRoute]String username){ //from route takes data from the route
             var d=new Dictionary<String ,dynamic>{ };
             d.Add(" username",username);
             return d ;
@@ -35,7 +35,8 @@ namespace aspapi.Controllers
 
         [Route("search")]
         //using search parameters i.e /search?id=&token=
-        public dynamic search(int id,String token) => $"id is {id} and token is {token}";
+        //using from query binder 
+        public dynamic search([FromQuery]int id,String token) => $"id is {id} and token is {token}";
 
         [Route("[controller]/[action]")]
         //this route return home/getname that is name of the controller followed by service name as action

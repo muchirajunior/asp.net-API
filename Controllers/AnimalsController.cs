@@ -8,6 +8,9 @@ namespace aspapi.Controllers{
     [ApiController]
     [Route("[controller]")]
    public class AnimalsController : ControllerBase{
+
+       [BindProperty]
+       public UserModel Animals {get; set;} //we will use the user model because the Animals has a constructer
         
         [Route("")]
         [HttpGet]
@@ -24,6 +27,10 @@ namespace aspapi.Controllers{
 
         [HttpGet("redirect")]
         public IActionResult redirect()=> Redirect("bad");
+
+        [HttpPost("data")]
+        //this method takes form data and sets it to  bind property Animals
+        public IActionResult animalData()=> Ok(Animals);
 
     }
 }
