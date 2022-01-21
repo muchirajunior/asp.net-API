@@ -6,7 +6,7 @@ namespace aspapi.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-
+    
     public class RestController : ControllerBase{
 
         [BindProperty]
@@ -18,7 +18,7 @@ namespace aspapi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public string get(int id)=> "this rest default url "+id;
+        public string get([FromRoute]int id)=> "this rest default url "+id;
 
         [HttpGet]
         public  dynamic getData()
@@ -39,10 +39,14 @@ namespace aspapi.Controllers
 
         [HttpPost]
         //this method takes in a json body request and maps it to the user model
-        //perfect post in api using from nody binder
+        //perfect post in api using FromBody binder
         public IActionResult userData([FromBody]UserModel user){
             return Ok(user);
         }
+
+        [HttpDelete]
+        //a sample delete
+        public IActionResult delete() => Ok("deleted succesfuly");
 
 
     }

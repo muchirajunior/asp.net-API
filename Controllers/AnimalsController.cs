@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using aspapi.Models;
+using aspapi.Binders;
 
 namespace aspapi.Controllers{
 
@@ -31,6 +32,10 @@ namespace aspapi.Controllers{
         [HttpPost("data")]
         //this method takes form data and sets it to  bind property Animals
         public IActionResult animalData()=> Ok(Animals);
+
+        [HttpGet("search")]
+        //using a cuatom model binder to separate search?animals=dog|cow|puppy and return an array of the query string
+        public IActionResult search([ModelBinder(typeof(AnimalsBinder))] string[] animals ) => Ok(animals);
 
     }
 }
