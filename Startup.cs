@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using aspapi.Services;
 
 namespace aspapi
 {
@@ -32,6 +33,8 @@ namespace aspapi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "aspapi", Version = "v1" });
             });
+
+            services.AddSingleton<IAnimalServices, AnimalServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,12 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using aspapi.Models;
 using aspapi.Binders;
+using aspapi.Services;
 
 namespace aspapi.Controllers{
 
     [ApiController]
     [Route("[controller]")]
    public class AnimalsController : ControllerBase{
+
+       private readonly IAnimalServices _ianimalServices;
+
+       public AnimalsController(IAnimalServices animalServices){
+           this._ianimalServices=animalServices;
+       }
 
        [BindProperty]
        public UserModel Animals {get; set;} //we will use the user model because the Animals has a constructer
@@ -34,8 +41,16 @@ namespace aspapi.Controllers{
         public IActionResult animalData()=> Ok(Animals);
 
         [HttpGet("search")]
-        //using a cuatom model binder to separate search?animals=dog|cow|puppy and return an array of the query string
+        //using a custom model binder to separate search?animals=dog|cow|puppy and return an array of the query string
         public IActionResult search([ModelBinder(typeof(AnimalsBinder))] string[] animals ) => Ok(animals);
+
+        [HttpGet("add")]
+        public IActionResult AddAnimal([FromQuery]string name){
+            AnimalsModel animalsModel=new AnimalsModel(id:1,name:name);
+            _ianimalServices.addAnimal(animalsModel);
+
+            return Ok(_ianimalServices.GetAllAnimals());
+        }
 
     }
 }
